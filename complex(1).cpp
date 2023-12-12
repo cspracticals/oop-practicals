@@ -1,56 +1,56 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-
 class complex
 {
-    private:
-        int real;
-        int img;
-
-    public:
-        // Constructor with default values
-        complex(int r = 0, int i = 0) {
-            real = r;
-            img = i;
-        }
-
-        // Addition operator overloading
-        complex operator+(const complex &obj) {
-            complex temp;
-            temp.real = real + obj.real;
-            temp.img = img + obj.img;
-            return temp;
-        }
-
-        // Multiplication operator overloading
-        complex operator*(const complex &obj) {
-            complex temp;
-            temp.real = real * obj.real - img * obj.img;
-            temp.img = real * obj.img + img * obj.real;
-            return temp; 
-        }
-
-        // Print function
-        void print() {
-            cout << real << "+" << img << "i";
-        }
+public:
+        float real,img;
+        complex operator+ (complex);
+        complex operator* (complex);
+        friend ostream &operator<<(ostream&,complex&);
+        friend istream &operator>>(istream&,complex&);
 };
-
+complex complex::operator+(complex obj)
+{
+        complex temp;
+        temp.real = real + obj.real;
+        temp.img = img + obj.img;
+        return(temp);
+}
+istream &operator >>(istream &is, complex &obj)
+{
+        is>>obj.real;
+        is>>obj.img;
+        return is;
+}
+ostream &operator<<(ostream &outt,complex &obj)
+{
+        outt<<" "<<obj.real;
+        outt<<"+"<<obj.img<<"i";
+        return outt;
+}
+complex complex::operator*(complex obj)
+{
+        complex temp;
+        temp.real = real*obj.real - img*obj.img;
+        temp.img = img*obj.real + real*obj.img;
+        return(temp);
+}
 int main()
 {
-    complex c1(10, 5), c2(2, 4);
-
-    // Addition
-    complex c3 = c1 + c2;
-    cout << "Sum: ";
-    c3.print();
-    cout << endl;
-
-    // Multiplication
-    complex c4 = c1 * c2;
-    cout << "Product: ";
-    c4.print();
-
-    return 0;
+        complex a,b,c,d;
+        cout<<"\n The first Complex number is: ";
+        cout<<"\n Enter real and img: ";
+        cin>>a;
+        cout<<"\nThe second Complex number is:";
+        cout<<"\nEnter real and img: ";
+        cin>>b;
+        cout<<"\n\n\t\t Arithmetic operations";
+        c=a+b;
+        cout<<"\n Add=";
+        cout<<c;
+        d=a*b;
+        cout<<"\n Multiplication=";
+        cout<<d;
+        cout<<endl;
+        return 0;
 }
-
