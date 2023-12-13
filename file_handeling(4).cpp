@@ -1,37 +1,28 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 int main()
 {
-	ofstream outfile;
-	outfile.open("temp.txt",ios::app);
-	string s;
-	while(1)
-	{
-		cout<<"Enter 1 for writting to file OR 0 to Exit"<<endl;
-		int ch;
-		cin>>ch;
-		if (ch==1)
-		{
-			cin.get();
-			getline(cin,s);
-			outfile<<s<<endl;
-		}
-		else if(ch==0)
-		{
-			cout<<"EXITED"<<endl;
-			break;
-		}
-		
-	}
-	outfile.close();
-	ifstream infile;
-	infile.open("temp.txt",ios::in);
-	cout<<"File contents"<<endl;
-	while(!infile.eof())
-	{
-		getline(infile, s);
-		cout<<s<<endl;
-	}
-	return 0;
+    char data[100];
+    ofstream outfile;
+    outfile.open("afile,dat");
+    cout << "Write to the file" << endl;
+    cout << "Enter your name:";
+    cin.getline(data, 100);
+    outfile << data << endl;
+    cout << "Enter your ROLLNO:";
+    cin >> data;
+    cin.ignore();
+    outfile << data << endl;
+    outfile.close();
+    ifstream infile;
+    infile.open("afile.dat");
+    cout << "Reading from the file" << endl;
+    infile >> data;
+    cout << data << endl;
+    infile >> data;
+    cout << data << endl;
+    infile.close();
+    return 0;
 }
